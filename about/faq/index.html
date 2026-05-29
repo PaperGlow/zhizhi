@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>蜘蜘 - FAQ</title>
+    <style>
+        :root {
+            --pure-white: #FFFFFF;
+            --pure-black: #000000;
+            --gray-95: #F2F2F2;
+            --gray-85: #D9D9D9;
+            --gray-65: #A6A6A6;
+            --font-mono: "Courier New", Courier, "Liberation Mono", "Consolas", "Noto Sans Mono", monospace;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-mono);
+            background-color: var(--gray-95);
+            color: var(--pure-black);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        #top-bar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 42px;
+            background-color: var(--pure-white);
+            display: flex; align-items: center; padding: 0 20px; z-index: 100;
+            border-bottom: 2px solid var(--pure-black);
+        }
+        #top-bar .title { font-size: 26px; font-weight: bold; color: var(--pure-black); }
+        #content {
+            max-width: 700px;
+            margin: 64px auto 40px;
+            padding: 20px;
+            background-color: var(--pure-white);
+            border: 2px solid var(--pure-black);
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+        }
+        h1 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--pure-black);
+            padding-bottom: 8px;
+        }
+        .faq-item {
+            margin-bottom: 24px;
+        }
+        .faq-item h3 {
+            font-size: 17px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        .faq-item p {
+            font-size: 15px;
+        }
+        .faq-item ul {
+            margin-top: 6px;
+            padding-left: 20px;
+            font-size: 15px;
+        }
+        .faq-item ul li {
+            margin-bottom: 4px;
+        }
+        .strikethrough {
+            text-decoration: line-through;
+        }
+        a {
+            color: var(--pure-black);
+            text-decoration: underline;
+        }
+        a:hover { opacity: 0.7; }
+    </style>
+</head>
+<body>
+<div id="top-bar">
+    <span class="title">蜘蜘</span>
+</div>
+<div id="content">
+    <h1>蜘蜘 FAQ</h1>
 
+    <div class="faq-item">
+        <h3>Q：“蜘蜘”是什么网站？</h3>
+        <p>“蜘蜘”是一个随机的网络导航页，收录了大量风格古早的页面。<br>
+        蜘蜘在网络上发现了很多奇奇怪怪的小角落，就在想“这么多有意思的东西如果更容易发现就好了”，所以做了这么一个小小的项目，希望大家喜欢៷&gt;ᴗ&lt;៷</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Q：蜘蜘是什么？</h3>
+        <p>蜘蜘就是画面中心的那只小跳蛛啦，平时老是缩在蜘蛛洞里面，如果有想去的地方可以让它带你过去，不过蜘蜘似乎不太能听懂？总之每次点击“随机漫游”按钮，蜘蜘都会随便带你去一个地方，如果有想去的地方也可以点击标签告诉蜘蜘，蜘蜘会努力寻找相关的页面的\(≧▽≦)/</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Q：网站怎么操作？</h3>
+        <p><span class="strikethrough">随便乱点。</span>以下是网页的可交互部分：</p>
+        <ul>
+            <li>右上角的问号可以点击以查看Q＆A</li>
+            <li>点击“随机漫游”按钮可以随机推荐一个页面</li>
+            <li>页面的窗口可以按住顶栏拖拽</li>
+            <li>点击“x”或者任意窗口外区域可以关闭窗口</li>
+            <li>点击“出发”可以跳转到目的地</li>
+            <li>标签可以拖拽和点击</li>
+            <li>点击蜘蜘可以随机得到一个标签</li>
+        </ul>
+    </div>
+
+    <div class="faq-item">
+        <h3>Q：为什么图片总是跑掉？</h3>
+        <p>蜘蜘宅太久了没有锻炼，抓取图片时老是跑掉T^T。好吧，实际上，蜘蜘是从网站的默认地址抓取图标的，但是有相当一部分网站没有按照默认地址放置图标，所以就会抓取失败。有时候图标也会因为网络连接的原因卡掉，加载不出来。</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Q：网址里的“mt”是什么意思？</h3>
+        <p>
+            <span class="strikethrough" id="mt-random-word">蜜桃</span>
+            其实蜘蜘是在DNSHE上免费注册的网址，所以是二级域名啦。 <span class="strikethrough">别记成.cn.md就行</span>
+        </p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Q：我可以投稿吗？</h3>
+        <p>可以！如果你有想要投稿的页面，请在 <a href="mailto:marichy_x@qq.com">marichy_x@qq.com</a> 联系蜘蜘！</p>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const words = ["蜜桃", "面条", "馒头", "米汤", "马桶", "茅台"];
+        const randomWord = words[Math.floor(Math.random() * words.length)];
+        document.getElementById("mt-random-word").textContent = randomWord;
+    })();
+</script>
+</body>
+</html>
