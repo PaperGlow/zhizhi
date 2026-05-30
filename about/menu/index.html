@@ -2,9 +2,8 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="referrer" content="origin">
-    <title>蜘蜘的菜单 · 收集有趣角落</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>蜘蜘的菜单</title>
     <style>
         :root {
             --pure-white: #FFFFFF;
@@ -16,7 +15,7 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* 整体视口锁定，只留菜单区滚动，确保阴影完全可见 */
+        /* 整体视口锁定，只留菜单区滚动 */
         html, body {
             height: 100%;
             overflow: hidden;
@@ -28,9 +27,12 @@
             line-height: 1.5;
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            /* 使用动态视口单位 + 回退，确保底部留白足够且适应地址栏变化 */
+            min-height: 100vh;
+            min-height: 100dvh;
             margin: 0;
-            padding: 0 0 18px 0;      /* 底部留出空间，阴影完整 */
+            /* 底部留白增大至 40px，彻底解决阴影裁剪 */
+            padding: 0 0 40px 0;
             box-sizing: border-box;
         }
 
@@ -76,7 +78,7 @@
             flex: 1;
             max-width: 880px;
             width: 90%;
-            margin: 20px auto 0 auto;
+            margin: 20px auto 0 auto;  /* 上边距保留，下边距归零 */
             background-color: var(--pure-white);
             border: 2px solid var(--pure-black);
             box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
@@ -84,6 +86,7 @@
             flex-direction: column;
             overflow: hidden;
             position: relative;
+            min-height: 0;            /* 关键：保证标题固定 + 菜单滚动 */
         }
 
         .menu-header {
@@ -116,6 +119,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            min-height: 0;            /* 确保滚动区域高度受限 */
         }
 
         .menu-item {
@@ -171,7 +175,7 @@
             border-radius: 0px;
         }
 
-        /* 弹窗样式 */
+        /* 弹窗样式（完全保留） */
         #overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.5);
@@ -256,10 +260,19 @@
         }
         .hidden { display: none !important; }
 
+        /* 移动端微调：增加底部留白，并使用安全区适配 */
         @media (max-width: 600px) {
-            body { padding-bottom: 12px; }
-            #content { width: 92%; margin: 16px auto 0 auto; }
-            .menu-header { padding: 12px 18px 8px 18px; }
+            body {
+                padding-bottom: 40px;          /* 移动端也使用较大留白 */
+                padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); /* 适配全面屏底部黑条 */
+            }
+            #content {
+                width: 92%;
+                margin: 16px auto 0 auto;
+            }
+            .menu-header {
+                padding: 12px 18px 8px 18px;
+            }
             .menu-header h1 { font-size: 22px; }
             .reset-btn { right: 16px; font-size: 11px; padding: 4px 10px; }
             .menu-grid { padding: 6px 12px 16px 12px; }
@@ -563,7 +576,7 @@
         });
     }
 
-    // ---------- 渲染菜单（核心修复：无论如何都会替换“加载中”）----------
+    // ---------- 渲染菜单 ----------
     function escapeHtml(str) { 
         if (!str) return '';
         return String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); 
@@ -573,7 +586,6 @@
         const container = document.getElementById('menu-list');
         if (!container) return;
         
-        // 立即清空“加载中”，防止残留
         if (!PAGES.length) {
             container.innerHTML = '<div class="empty-message">🕷️ 暂无菜单项目，在 PAGES 中添加你的角落吧</div>';
             return;
@@ -603,7 +615,6 @@
         
         container.innerHTML = html;
         
-        // 绑定点击事件
         document.querySelectorAll('.menu-item').forEach(el => {
             el.addEventListener('click', (e) => {
                 const idx = parseInt(el.getAttribute('data-index'), 10);
@@ -622,13 +633,11 @@
         });
     }
 
-    // 重置按钮
     const resetBtn = document.getElementById('reset-history-btn');
     if (resetBtn) resetBtn.addEventListener('click', () => { 
         if (confirm('🗑️ 清除所有探险记录？所有链接将恢复原样。')) clearAllHistory(); 
     });
     
-    // 启动所有功能
     loadVisitedRecords();
     renderMenu();
     initPopupDrag();
